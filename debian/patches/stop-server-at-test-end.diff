@@ -1,0 +1,123 @@
+Description: server wasn't closed at test end
+Author: Xavier Guimard <yadd@debian.org>
+Bug-Debian: https://bugs.debian.org/906390
+Forwarded: https://github.com/expressjs/vhost/issues/34
+Last-Update: 2020-02-24
+
+--- a/test/test.js
++++ b/test/test.js
+@@ -20,6 +20,7 @@
+     .get('/')
+     .set('Host', 'tobi.com')
+     .expect(200, 'tobi', done)
++    closeApp(app)
+   })
+ 
+   it('should ignore port in Host', function(done){
+@@ -31,6 +32,7 @@
+     .get('/')
+     .set('Host', 'tobi.com:8080')
+     .expect(200, 'tobi', done)
++    closeApp(app)
+   })
+ 
+   it('should support IPv6 literal in Host', function(done){
+@@ -42,6 +44,7 @@
+     .get('/')
+     .set('Host', '[::1]:8080')
+     .expect(200, 'loopback', done)
++    closeApp(app)
+   })
+ 
+   it('should 404 unless matched', function(done){
+@@ -59,6 +62,7 @@
+     .get('/')
+     .set('Host', 'ferrets.com')
+     .expect(404, done)
++    closeApp(app)
+   })
+ 
+   it('should 404 without Host header', function(done){
+@@ -76,6 +80,7 @@
+     .get('/')
+     .unset('Host')
+     .expect(404, done)
++    closeApp(app)
+   })
+ 
+   describe('arguments', function(){
+@@ -118,6 +123,7 @@
+       .get('/')
+       .set('Host', 'loki.ferrets.com')
+       .expect(200, 'wildcard!', done)
++      closeApp(app)
+     })
+ 
+     it('should restrict wildcards to single part', function(done){
+@@ -129,6 +135,7 @@
+       .get('/')
+       .set('Host', 'foo.loki.ferrets.com')
+       .expect(404, done)
++      closeApp(app)
+     })
+ 
+     it('should treat dot as a dot', function(done){
+@@ -140,6 +147,7 @@
+       .get('/')
+       .set('Host', 'aXb.com')
+       .expect(404, done)
++      closeApp(app)
+     })
+ 
+     it('should match entire string', function(done){
+@@ -151,6 +159,7 @@
+       .get('/')
+       .set('Host', 'foo.com')
+       .expect(404, done)
++      closeApp(app)
+     })
+ 
+     it('should populate req.vhost', function(done){
+@@ -164,6 +173,7 @@
+       .get('/')
+       .set('Host', 'user-bob.foo.com:8080')
+       .expect(200, '[["0","bob"],["1","foo"],["host","user-bob.foo.com:8080"],["hostname","user-bob.foo.com"],["length",2]]', done)
++      closeApp(app)
+     })
+   })
+ 
+@@ -177,6 +187,7 @@
+       .get('/')
+       .set('Host', 'toki.com')
+       .expect(200, 'tobi', done)
++      closeApp(app)
+     })
+ 
+     it('should match entire hostname', function(done){
+@@ -194,6 +205,7 @@
+       .get('/')
+       .set('Host', 'loki.tobi.com')
+       .expect(404, done)
++      closeApp(app)
+     })
+ 
+     it('should populate req.vhost', function(done){
+@@ -207,10 +219,18 @@
+       .get('/')
+       .set('Host', 'user-bob.foo.com:8080')
+       .expect(200, '[["0","bob"],["1","foo"],["host","user-bob.foo.com:8080"],["hostname","user-bob.foo.com"],["length",2]]', done)
++      closeApp(app)
+     })
+   })
+ })
+ 
++function closeApp(app) {
++  var close = function() {
++    app.close()
++  }
++  setTimeout(close,2000)
++}
++
+ function createServer(hostname, server) {
+   var vhosts = !Array.isArray(hostname)
+     ? [vhost(hostname, server)]

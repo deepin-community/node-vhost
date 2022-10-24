@@ -1,0 +1,84 @@
+node-vhost (3.0.2-5) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Apply multi-arch hints. + node-vhost: Add Multi-Arch: foreign.
+
+  [ Yadd ]
+  * Bump debhelper compatibility level to 13
+  * Modernize debian/watch
+  * Fix GitHub tags regex
+  * Use dh-sequence-nodejs
+  * Uploaders: replace Leo Iannacone by myself, thanks for your work!
+  * Update standards version to 4.6.0, no changes needed.
+  * Fix filenamemangle
+
+ -- Yadd <yadd@debian.org>  Fri, 15 Oct 2021 17:02:06 +0200
+
+node-vhost (3.0.2-4) unstable; urgency=medium
+
+  * Team upload
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Submit.
+  * Remove obsolete fields Contact, Name from debian/upstream/metadata
+    (already present in machine-readable debian/copyright).
+
+  [ Xavier Guimard ]
+  * Declare compliance with policy 4.5.0
+  * Fix test for mocha ≥ 7 (Closes: #952212)
+
+ -- Xavier Guimard <yadd@debian.org>  Mon, 24 Feb 2020 18:06:08 +0100
+
+node-vhost (3.0.2-3) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.4.1
+  * Add "Rules-Requires-Root: no"
+  * Require node-supertest ≥ 1.1.0 (fixes debci)
+
+ -- Xavier Guimard <yadd@debian.org>  Sat, 21 Dec 2019 14:54:29 +0100
+
+node-vhost (3.0.2-2) unstable; urgency=medium
+
+  * Team upload
+  * Bump debhelper compatibility level to 12
+  * Declare compliance with policy 4.4.0
+  * Add debian/gbp.conf
+  * Switch install to pkg-js-tools
+
+ -- Xavier Guimard <yadd@debian.org>  Sat, 03 Aug 2019 15:44:21 +0200
+
+node-vhost (3.0.2-1) unstable; urgency=medium
+
+  * Team upload
+  * Bump debhelper compatibility level to 11
+  * Declare compliance with policy 4.3.0
+  * Change section to javascript
+  * Change priority to optional
+  * Update VCS fields to salsa
+  * Fix debian/copyright format
+  * New upstream version 3.0.2
+  * Update d/copy
+  * Add patch to clean test (Closes: #906390)
+  * Add upstream/metadata
+  * Switch tests to pkg-js-tools
+  * Add "Multi-Arch: foreign"
+
+ -- Xavier Guimard <yadd@debian.org>  Thu, 14 Feb 2019 12:36:54 +0100
+
+node-vhost (3.0.0-1) unstable; urgency=medium
+
+  * Imported Upstream version 3.0.0
+  * Bump Standard-Version 3.9.6
+  * debian/watch: fix dversionmangle
+  * Add autopkgtest suite
+  * Update debian dh_auto_test command
+  * Add new author in debian/copyright
+
+ -- Leo Iannacone <l3on@ubuntu.com>  Sat, 11 Oct 2014 19:29:56 +0200
+
+node-vhost (2.0.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #751595)
+
+ -- Leo Iannacone <l3on@ubuntu.com>  Wed, 18 Jun 2014 23:58:18 +0200
